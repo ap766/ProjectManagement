@@ -22,7 +22,10 @@ const project = new mongoose.Schema({
             updated_at: { type: Date, default: Date.now },
         }
     ]
+  
 }, { timestamps: true })
 
 
-export default mongoose.model('Project', project);
+export default mongoose.model('P', project);
+
+//  here task is an array of objects. 

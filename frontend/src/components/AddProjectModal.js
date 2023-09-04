@@ -1,5 +1,9 @@
 import React, { Fragment, memo, useEffect, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
+//headlessui is a library that provides accessible UI components, such as modals, popovers, menus, and more, in a way that is easy to use and composable.
+
+//axios is a library that helps us make http requests to external resources. In this case we are using it to make requests to our backend server.
+
 import BtnPrimary from './BtnPrimary'
 import BtnSecondary from './BtnSecondary'
 import axios from "axios"

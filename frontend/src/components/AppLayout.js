@@ -2,6 +2,8 @@ import React from 'react'
 import Navbar from './Navbar'
 import Sidebar from './Sidebar'
 
+// AppLayout is a wrapper component that will be used to wrap all the components that we want to render inside the layout.
+
 const AppLayout = ({ children }) => {
     return (
         <div className='bg-white'>

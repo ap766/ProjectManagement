@@ -1,3 +1,6 @@
+/*CRUD is an acronym that stands for Create, Read, Update, and Delete. It represents the four basic operations that can be performed on data in most database systems and forms the foundation for interacting with and managing data in applications, especially in the context of web and software development. Here's what each operation entails:
+*/
+
 import express from 'express';
 import joi from 'joi';
 import mongoose from 'mongoose';
@@ -5,6 +8,7 @@ import Project from '../models/index.js'
 
 const api = express.Router()
 
+//to display the projects 
 api.get('/projects', async (req, res) => {
     try {
         const data = await Project.find({}, { task: 0, __v: 0, updatedAt: 0 })
@@ -14,6 +18,7 @@ api.get('/projects', async (req, res) => {
     }
 })
 
+//to display individual project
 api.get('/project/:id', async (req, res) => {
     if (!req.params.id) res.status(422).send({ data: { error: true, message: 'Id is reaquire' } })
     try {
@@ -24,8 +29,8 @@ api.get('/project/:id', async (req, res) => {
     }
 })
 
+//to create project
 api.post('/project', async (req, res) => {
-
     // validate type 
     const project = joi.object({
         title: joi.string().min(3).max(30).required(),
@@ -53,6 +58,7 @@ api.post('/project', async (req, res) => {
 
 })
 
+//to update project
 api.put('/project/:id', async (req, res) => {
     // validate type 
     const project = joi.object({
@@ -75,6 +81,8 @@ api.put('/project/:id', async (req, res) => {
 
 })
 
+
+//to delete project
 api.delete('/project/:id', async (req, res) => {
     try {
         const data = await Project.deleteOne({ _id: mongoose.Types.ObjectId(req.params.id) })
@@ -87,7 +95,7 @@ api.delete('/project/:id', async (req, res) => {
 
 
 //  task api   
-
+//to create task
 api.post('/project/:id/task', async (req, res) => {
 
 
@@ -116,6 +124,7 @@ api.post('/project/:id/task', async (req, res) => {
     }
 })
 
+//to display task
 api.get('/project/:id/task/:taskId', async (req, res) => {
 
     if (!req.params.id || !req.params.taskId) return res.status(500).send(`server error`);
@@ -150,7 +159,7 @@ api.get('/project/:id/task/:taskId', async (req, res) => {
 
 })
 
-
+//to update task
 api.put('/project/:id/task/:taskId', async (req, res) => {
 
     if (!req.params.id || !req.params.taskId) return res.status(500).send(`server error`);
@@ -191,6 +200,8 @@ api.put('/project/:id/task/:taskId', async (req, res) => {
 
 })
 
+
+//to delete task
 api.delete('/project/:id/task/:taskId', async (req, res) => {
 
     if (!req.params.id || !req.params.taskId) return res.status(500).send(`server error`);
@@ -204,6 +215,8 @@ api.delete('/project/:id/task/:taskId', async (req, res) => {
 
 })
 
+
+//to update task stage 
 api.put('/project/:id/todo', async (req, res) => {
     let todo = []
 
@@ -225,25 +238,6 @@ api.put('/project/:id/todo', async (req, res) => {
     res.send(todo)
 })
 
-// api.use('/project/:id/task', async (req, res, next) => {
-//     if (req.method !== "GET") return next()
 
-//     if (!req.params.id) return res.status(500).send(`server error`);
-
-//     try {
-//         const data = await Project.find({ _id: mongoose.Types.ObjectId(req.params.id) }, { task: 1 })
-//         return res.send(data)
-//     } catch (error) {
-//         return res.send(error)
-//     }
-
-
-// })
-
-// api.get('/project/:id/task/:taskId', (req, res) => {
-//     res.send(req.params)
-// })
-
-
-
+//so basically crud for project , crud for task and update task stage is done here.
 export default api

@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { v4 as uuid } from "uuid";
+
+//uuid is a library to generate unique id for our tasks.
+
 import AddTaskModal from "./AddTaskModal";
 import BtnPrimary from './BtnPrimary'
 import DropdownMenu from "./DropdownMenu";
